@@ -2,14 +2,24 @@ import logging
 import sys
 
 logger = logging.getLogger(__name__)
-logger.debug(sys.argv)
+
 dlevel = logging.WARNING
 
 if len(sys.argv) > 1:
     logger.debug("Setting log level to: " + sys.argv[1])
     dlevel = sys.argv[1]
 logging.basicConfig(format='%(name)s %(levelname)s:%(asctime)s %(message)s',datefmt='%m/%d/%Y %I:%M:%S',level=dlevel)
+logger.debug(sys.argv)
 
-from HVAC import hvac
+import HVAC.Therm
 
-print(hvac.status())
+("Default 1-wire status = ")
+print(HVAC.Therm.status())
+#print("IsCelcius 1-wire status = ")
+#print(HVAC.Therm.status(1))
+#print("IsFahr 1-wire status = ")
+#print(HVAC.Therm.status(0))
+
+'''
+Requires the GPIO setup with one-wire devices attached
+'''
