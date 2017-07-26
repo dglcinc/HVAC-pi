@@ -1,0 +1,2 @@
+# Local
+This folder contains files used to build a dynamic page for serving by an Apache instance on an RPi. They are deployed in the cgi-bin directory of the Apache server, after the Python cgi functionality has been turned on.
