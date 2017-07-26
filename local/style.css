@@ -7,7 +7,7 @@ thead {
     font-size: 100%;
     color: #fff;
 }
-.mtu {
+.mtu, .rly {
     width: auto; 
     height: 100%;
 }
