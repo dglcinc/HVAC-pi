@@ -26,8 +26,8 @@ if len(sys.argv) > 1:
 
 logging.basicConfig(format='%(name)s %(levelname)s:%(asctime)s %(message)s',datefmt='%m/%d/%Y %I:%M:%S',level=dlevel)
             
-print 'Content-type: text/html\n\n'
-print "<meta http-equiv='refresh' content='2'/>"
+print "Content-type: text/html\n\n"
+#print "<meta http-equiv='refresh' content='2'/>"
 
 from HVAC import hvac
 
@@ -68,5 +68,5 @@ for e in soup.find_all("td"):
     if e["class"] == ["temp"]:
         e.string = "%s %d" % (e.string, int(data["Therm"][e["id"]]))
     if e["class"] == ["mtu"]:
-        e.string = "%03f KWh" % data["Power"][e["id"]]
+        e.string = "%0.3f KWh" % (data["Power"][e["id"]]/1000.0)
 print (soup.prettify())

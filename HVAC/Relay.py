@@ -29,8 +29,8 @@ R = {
     "RCHL" :[5, 29],
     "LCHL" : [6, 31],
     "Y2ON" : [13, 33],
-    "YOFF" : [16, 36],
-    "Y2FAN" : [26, 37]
+    "YOFF" : [26, 37],
+    "Y2FAN" : [16, 36]
 }
 
 def init_pins(pinmode = GPIO.BCM):

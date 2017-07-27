@@ -20,10 +20,11 @@ body {
     border-left: 2px solid rgba(256,256,256,1);
 }
 td, th {
+    border-left: solid 2px #fff;
+    border-right: solid 2px #fff;
     text-align: center;
     font-family: sans-serif;
     font-size: 3em;
-    text-transform: uppercase;
     width: 25%;
     color: #fff;
     border-bottom: solid 2px #fff;
