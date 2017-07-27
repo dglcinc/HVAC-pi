@@ -18,12 +18,12 @@ def status():
 		MTU4:0
 	}
 	page = requests.get("http://192.168.1.124/stats.htm")
-	logger.debug(page.content)
+#   logger.debug(page.content)
 	tree = lxml.html.fromstring(page.content)
 	table = tree.xpath("/html/body/center/table[1]/*[text()]")
 	for element in table:
 		el = element.findall("*")
-		logger.debug(el)
+#		logger.debug(el)
 		for item in el:
 			logger.debug(item.text)
 			if item.text == "Power:":

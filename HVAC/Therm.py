@@ -17,8 +17,8 @@ DS4 = "0516a36816ff"
 DS5 = "0316a015e7ff"
 
 dnames = {
-    DS1 : "HDR_IN",
-    DS2 : "HDR_OUT",
+    DS1 : "IN",
+    DS2 : "OUT",
     DS3 : "CRW",
     DS4 : "AMB",
     DS5 : "Unassigned"

@@ -24,6 +24,7 @@ if len(sys.argv) > 1:
         else:
             logger.exception("Unknown argument: " + arg)
 
+# use warning for the library call, only use debug for this script
 logging.basicConfig(format='%(name)s %(levelname)s:%(asctime)s %(message)s',datefmt='%m/%d/%Y %I:%M:%S',level=dlevel)
             
 print "Content-type: text/html\n\n"
@@ -33,19 +34,20 @@ from HVAC import hvac
 
 used_cache = 0
 try:
-	f = open("/tmp/hvac_current.json", "r")
-	if f:
-		data = json.loads(f.read())
-		f.close()
-		if time.time() - data["Timestamp"] < 10:
-#			print (json.dumps(data, indent=2))
-			used_cache = 1
+    f = open("/tmp/hvac_current.json", "r")
+    if f:
+        data = json.loads(f.read())
+        f.close()
+        if time.time() - data["Timestamp"] < 10:
+#           print (json.dumps(data, indent=2))
+            used_cache = 1
 except IOError:
-	print("error")
-	used_cache = 0
+    print("error")
+    used_cache = 0
 
 if used_cache == 0:
-	data = hvac.status()
+    data = json.loads(hvac.status())
+    logger.warning("Cache out of date.")
 
 try:
     f = open("hvac.html","r")
@@ -58,13 +60,15 @@ for e in soup.find_all("th"):
     if e["id"] == "date":
         logger.debug("Timestamp = " + str(data["Timestamp"]))
         e.string = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime(int(data["Timestamp"])))
+        if used_cache == 0:
+            e["style"] = "background-color:crimson"
 for e in soup.find_all("td"):
     logger.debug("Tag: " + str(e))
     logger.debug("Class: " + str(e["class"]))
     if e["class"] == ["rly"]:
         logger.debug("Relay item", str (e["class"]))
         if data["Relay"][e["id"]] == True:
-            e["bgcolor"] = "#00FF00"
+            e["style"] = "background-color:green;color:black"
     if e["class"] == ["temp"]:
         e.string = "%s %d" % (e.string, int(data["Therm"][e["id"]]))
     if e["class"] == ["mtu"]:
