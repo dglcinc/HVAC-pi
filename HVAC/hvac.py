@@ -3,6 +3,7 @@ import Relay
 import Power
 # import OneWire
 import Therm
+import Stats
 
 import time
 import logging
@@ -52,6 +53,8 @@ def status():
         "Therm" : {
         },
         "Power" : {
+        },
+        "Stats" : {
         }
     }
 
@@ -65,6 +68,9 @@ def status():
 
     rly = Relay.status()
     stat["Relay"] = rly
+
+    sts = Stats.status()
+    stat["Stats"] = sts
 
     stat["Timestamp"] = time.time()
 

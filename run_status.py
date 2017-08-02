@@ -7,6 +7,8 @@ logger = logging.getLogger(__name__)
 logger.debug(sys.argv)
 dlevel = logging.WARNING
 
+CYCLE_SECS = 10
+
 OM_DAEMON = 1
 OM_EXIT = 2
 OM_RUN = 3
@@ -75,6 +77,6 @@ if opmode == OM_DAEMON:
             f.close()
         else:
             logger.warning("Unable to open data file")
-        # start a run as close to every 5 seconds as possible
-        while (time.time() - timestamp) < 5:
-            time.sleep(0.1)
+        # start a run as close to every X seconds as possible
+        while (time.time() - timestamp) < CYCLE_SECS:
+            time.sleep(0.5)
