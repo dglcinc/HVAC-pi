@@ -72,6 +72,6 @@ def status():
     sts = Stats.status()
     stat["Stats"] = sts
 
-    stat["Timestamp"] = time.time()
+    stat["Timestamp"] = int(time.time())
 
     return json.dumps(stat, indent=2)

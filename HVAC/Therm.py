@@ -49,9 +49,9 @@ def status(is_celsius=0):
         logger.debug("Temp for: " + sensor.id + " is: " + str(thermtemp))
         try:
             name = dnames[sensor.id]
-            result[name] = thermtemp
+            result[name] = int(round(thermtemp))
         except KeyError:
             # this will add a new member to the dict with the name of the sensor
-            result[sensor.id] = thermtemp
+            result[sensor.id] = int(round(thermtemp))
     logger.debug(result)
     return result

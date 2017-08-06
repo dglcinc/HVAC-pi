@@ -49,7 +49,7 @@ try:
     if f:
         data = json.loads(f.read())
         f.close()
-        if time.time() - data["Timestamp"] < 20:
+        if time.time() - data["Timestamp"] < 120:
             used_cache = 1
 except:
     logger.exception("unable to read cache file")
