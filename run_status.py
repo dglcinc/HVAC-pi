@@ -2,6 +2,8 @@ import logging
 import sys
 import os
 import time
+import HvacAws
+import json
 
 logger = logging.getLogger(__name__)
 logger.debug(sys.argv)
@@ -29,6 +31,18 @@ if len(sys.argv) > 1:
             opmode = OM_EXIT
 
 logger.debug("Arg loading done.")
+
+def update_aws(jsonstr):
+    # update AWS
+    logger.debug("updating AWS now...")
+    aws_data = {
+        "state" : {
+            "reported" : json.loads(data)
+            }
+        }
+    logger.debug("AWS = " + str(aws_data))
+    HvacAws.updateRPiThing(json.dumps(aws_data))
+    return
 
 def get_lock(lock_file="/tmp/hvac_pi.pid"):
     try:
@@ -61,7 +75,9 @@ from HVAC import hvac
 
 if opmode == OM_RUN:
     logging.basicConfig(format='%(name)s %(levelname)s:%(asctime)s %(message)s',datefmt='%m/%d/%Y %I:%M:%S',level=dlevel)
-    print(hvac.status())
+    data = hvac.status()
+    print(data)
+    update_aws(data)
 if opmode == OM_DAEMON:
     logging.basicConfig(filename="/var/log/hvac/hvac.log",format='%(name)s %(levelname)s:%(asctime)s %(message)s',datefmt='%m/%d/%Y %I:%M:%S',level=dlevel)
     get_lock()
@@ -75,8 +91,10 @@ if opmode == OM_DAEMON:
             logger.debug("Data = " + str(data))
             f.write(data)
             f.close()
+            update_aws(data)
         else:
             logger.warning("Unable to open data file")
+
         # start a run as close to every X seconds as possible
         while (time.time() - timestamp) < CYCLE_SECS:
             time.sleep(0.5)

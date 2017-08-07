@@ -4,7 +4,6 @@ import cgitb
 import os
 import sys
 import json
-import time
 import logging
 import time
 from bs4 import BeautifulSoup
@@ -77,14 +76,18 @@ for e in soup.find_all("th"):
 for e in soup.find_all("td"):
     logger.debug("Tag: " + str(e))
     logger.debug("Class: " + str(e["class"]))
-    if e["class"] == ["rly"]:
-        logger.debug("Relay item" + str(e["class"]))
-        if data["Relay"][e["id"]] == True:
-            e["style"] = "background-color:green;color:black"
-    if e["class"] == ["temp"]:
-        e.string = "%s %d" % (e.string, int(data["Therm"][e["id"]]))
-    if e["class"] == ["mtu"]:
-        e.string = "%0.3f KWh" % (data["Power"][e["id"]]/1000.0)
+    try:
+        if e["class"] == ["rly"]:
+            logger.debug("Relay item" + str(e["class"]))
+            if data["Relay"][e["id"]] == True:
+                e["style"] = "background-color:green;color:black"
+        if e["class"] == ["temp"]:
+            e.string = "%s %d" % (e.string, int(data["Therm"][e["id"]]))
+        if e["class"] == ["mtu"]:
+            e.string = "%0.3f KWh" % (data["Power"][e["id"]]/1000.0)
+    except:
+        logger.exception("Ignoring exception")
+
 sn = soup.find("tr", "statname")
 st = soup.find("tr", "stattemp")
 sh = soup.find("tr", "stathum")
@@ -111,4 +114,5 @@ for name, i in data["Stats"].items():
     humtag["hum-id"] = name
     humtag.string = str(i["hum"]) + "%"
     sh.append(humtag)
+
 print (soup.prettify())
