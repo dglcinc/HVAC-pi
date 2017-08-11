@@ -1,0 +1,269 @@
+{
+  "sources": {
+    "pi-TED5000": {
+      "timestamp": "2017-08-11T02:59:16.773Z", 
+      "label": "pi-TED5000"
+    }, 
+    "pi-1wire": {
+      "timestamp": "2017-08-11T03:17:58.363Z", 
+      "label": "pi-1wire"
+    }, 
+    "pi-GPIO": {
+      "timestamp": "2017-08-11T03:17:58.836Z", 
+      "label": "pi-GPIO"
+    }, 
+    "pi-RedLink": {
+      "timestamp": "2017-08-11T03:17:57.169Z", 
+      "label": "pi-RedLink"
+    }
+  }, 
+  "self": "urn:mrn:signalk:uuid:48fd5290-d1fa-4f70-983b-0d44a5950dc1", 
+  "version": "0.1.0", 
+  "vessels": {
+    "urn:mrn:signalk:uuid:48fd5290-d1fa-4f70-983b-0d44a5950dc1": {
+      "environment": {
+        "inside": {
+          "thermostat": {
+            "KIDS ROOM": {
+              "status": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "off"
+              }, 
+              "temperature": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 296.48
+              }, 
+              "name": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "2834229"
+              }, 
+              "humidity": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 52
+              }
+            }, 
+            "GREAT ROOM": {
+              "status": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "off"
+              }, 
+              "temperature": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 297.04
+              }, 
+              "name": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "2834247"
+              }, 
+              "humidity": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 48
+              }
+            }, 
+            "MASTER BR": {
+              "status": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "cool"
+              }, 
+              "temperature": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 296.48
+              }, 
+              "name": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "2842218"
+              }, 
+              "humidity": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 50
+              }
+            }, 
+            "KITCHEN": {
+              "status": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "cool"
+              }, 
+              "temperature": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 297.04
+              }, 
+              "name": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "2528432"
+              }, 
+              "humidity": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 46
+              }
+            }, 
+            "DSTRS FAM ROOM": {
+              "status": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "fan"
+              }, 
+              "temperature": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 296.48
+              }, 
+              "name": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": "2417403"
+              }, 
+              "humidity": {
+                "timestamp": "2017-08-11T03:17:57.169Z", 
+                "$source": "pi-RedLink.XX", 
+                "value": 51
+              }
+            }
+          }, 
+          "hvac": {
+            "temperature": {
+              "AMB": {
+                "timestamp": "2017-08-11T03:17:58.363Z", 
+                "$source": "pi-1wire.XX", 
+                "value": 294
+              }, 
+              "CRW": {
+                "timestamp": "2017-08-11T03:17:58.363Z", 
+                "$source": "pi-1wire.XX", 
+                "value": 280
+              }, 
+              "IN": {
+                "timestamp": "2017-08-11T03:17:58.363Z", 
+                "$source": "pi-1wire.XX", 
+                "value": 279
+              }, 
+              "OUT": {
+                "timestamp": "2017-08-11T03:17:58.363Z", 
+                "$source": "pi-1wire.XX", 
+                "value": 284
+              }
+            }
+          }
+        }
+      }, 
+      "electrical": {
+        "switch": {
+          "utility": {
+            "Y2ON": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": false
+              }
+            }, 
+            "DEHUM": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": false
+              }
+            }, 
+            "RCHL": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": true
+              }
+            }, 
+            "BLR": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": false
+              }
+            }, 
+            "DHW": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": false
+              }
+            }, 
+            "Y2FAN": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": false
+              }
+            }, 
+            "ZV": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": true
+              }
+            }, 
+            "YOFF": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": false
+              }
+            }, 
+            "LCHL": {
+              "state": {
+                "timestamp": "2017-08-11T03:17:58.836Z", 
+                "$source": "pi-GPIO.XX", 
+                "value": false
+              }
+            }
+          }
+        }, 
+        "ac": {
+          "ted5000": {
+            "MTU1": {
+              "kwh": {
+                "timestamp": "2017-08-11T02:59:16.773Z", 
+                "$source": "pi-TED5000.XX", 
+                "value": 3603
+              }
+            }, 
+            "MTU2": {
+              "kwh": {
+                "timestamp": "2017-08-11T02:59:16.773Z", 
+                "$source": "pi-TED5000.XX", 
+                "value": 1061
+              }
+            }, 
+            "MTU3": {
+              "kwh": {
+                "timestamp": "2017-08-11T02:59:16.773Z", 
+                "$source": "pi-TED5000.XX", 
+                "value": 359
+              }
+            }, 
+            "MTU4": {
+              "kwh": {
+                "timestamp": "2017-08-11T02:59:16.773Z", 
+                "$source": "pi-TED5000.XX", 
+                "value": 0
+              }
+            }
+          }
+        }
+      }, 
+      "name": "68Lookout", 
+      "uuid": "urn:mrn:signalk:uuid:48fd5290-d1fa-4f70-983b-0d44a5950dc1"
+    }
+  }
+}

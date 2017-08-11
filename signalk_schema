@@ -1,0 +1,67 @@
+//schema keys for HVAC system
+
+// one-wire temparature sensors
+/vessels/self/environment/inside/hvac/temperature/in
+/vessels/self/environment/inside/hvac/temperature/out
+/vessels/self/environment/inside/hvac/temperature/crw
+/vessels/self/environment/outside/ambient/temperature
+
+// honeywell thermostats
+/vessels/self/environment/inside/thermostat/*/temperature
+/vessels/self/environment/inside/thermostat/*/humidity
+
+// control relays
+/vessels/self/electrical/switch/*/state
+
+// power panel monitors
+/vessels/self/electrical/ac/*/KWH
+
+
+Example full model:
+{
+    "vessels": {
+        "urn:": {
+        "version": "1.0",
+        "name": "68Lookout",
+        "source": "self",
+        "timezone": "EDT",
+        "environment": {
+          "inside": {
+            "hvac": {
+              "temperature": {
+                "in": {
+                  "timestamp": "",
+                  "onewire-tag":"00000000",
+                  "value":0,
+                  "$source":"file"
+                },
+                "out": {
+                  "timestamp": "",
+                  "onewire-tag":"00000000",
+                  "value":0,
+                  "$source":"file"
+                },
+                "crw": {
+                  "timestamp": "",
+                  "onewire-tag":"00000000",
+                  "value":0,
+                  "$source":"file"
+                }
+              }
+            }
+          }
+        },
+        "environment": {
+          "outside": {
+            "ambient": {
+              "temperature": {
+                  "timestamp": "",
+                  "onewire-tag":"00000000",
+                  "value":0,
+                  "$source":"file"
+                 }
+              }
+           }
+        }
+    }
+}
