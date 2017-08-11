@@ -3,10 +3,10 @@ import lxml.etree
 import requests
 import logging
 
-MTU1 = "MTU1_KW"
-MTU2 = "MTU2_KW"
-MTU3 = "MTU3_KW"
-MTU4 = "MTU4_KW"
+MTU1 = "MTU1"
+MTU2 = "MTU2"
+MTU3 = "MTU3"
+MTU4 = "MTU4"
 
 logger = logging.getLogger(__name__)
 

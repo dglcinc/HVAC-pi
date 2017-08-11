@@ -15,10 +15,6 @@ import HVAC.Therm
 
 ("Default 1-wire status = ")
 print(HVAC.Therm.status())
-#print("IsCelcius 1-wire status = ")
-#print(HVAC.Therm.status(1))
-#print("IsFahr 1-wire status = ")
-#print(HVAC.Therm.status(0))
 
 '''
 Requires the GPIO setup with one-wire devices attached
