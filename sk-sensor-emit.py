@@ -56,8 +56,8 @@ while 1:
             })
 
     elif args.stype == "TED5000":
-        import HVAC.Power
-        data = HVAC.Power.status()
+        import HVAC.TED5000
+        data = HVAC.TED5000.status()
         logger.debug(str(data))
 
         for d in data:
