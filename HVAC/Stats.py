@@ -10,27 +10,64 @@ import json
 import re
 
 logger = logging.getLogger(__name__)
+site_ready = False
+logged_in = False
+retrying = False
+locationId = ""
+locationId_prog = re.compile("GetZoneListData\?locationId=([0-9][0-9]*)&")
 
+try:
+    cj = cookielib.CookieJar()
+    br = mechanize.Browser()
+    br.set_cookiejar(cj)
+    site_ready = True
+
+except:
+    logger.exception("Error prepping Redlink scrape")
 
 def status():
+    global site_ready
+    global logged_in
+    global retrying
+    global locationId
+    global locationId_prog
+    global cj, br
+
     result = {}
 
     # log in to mytotalconnectcomfort.com
-    try:
-        cj = cookielib.CookieJar()
-        br = mechanize.Browser()
-        br.set_cookiejar(cj)
-        br.open("https://www.mytotalconnectcomfort.com/portal")
-        br.select_form(nr=0)
-        br.form['UserName'] = hs.uid
-        br.form['Password'] = hs.pwd
-        br.submit()
-    
-        stats_page = br.response().read()
-        logger.debug(stats_page)
-    except:    
-        logger.exception("Error scraping MyTotalConnectComfort.com")
-        return result
+    # NOTE: this code currently only works if you only have one location defined...
+    if site_ready:
+        try:
+            if logged_in == False:
+                logger.debug("Not logged in; logging in...")
+                br.open("https://www.mytotalconnectcomfort.com/portal")
+                br.select_form(nr=0)
+                br.form['UserName'] = hs.uid
+                br.form['Password'] = hs.pwd
+                response = br.submit()
+                stats_page = response.read()
+                list = locationId_prog.findall(stats_page)
+                locationId = list[0]
+                logger.debug("locationId=%s" % locationId)
+                logged_in = True
+            else:
+                refresh_link = "https://www.mytotalconnectcomfort.com/portal/%s/Zones" % locationId
+                logger.debug("Refresh link = %s" % refresh_link)
+                br.open(refresh_link)
+#                response = br.response()
+                response = br.reload()
+                stats_page = response.read()
+            logger.debug("Stats page = %s" % stats_page)
+        except:    
+            logger.exception("Error scraping MyTotalConnectComfort.com")
+            logged_in = False
+            if retrying == False:
+                retrying = True
+                result = status()
+            else:
+                retrying = False
+            return result
 
     soup = BeautifulSoup(stats_page, "lxml")
     for e in soup.find_all("tr", "gray-capsule pointerCursor"):

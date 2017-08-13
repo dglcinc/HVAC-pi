@@ -18,12 +18,13 @@ def status():
         MTU4:0
     }
     try:
+        logger.debug("Parsing TED data...")
         page = requests.get("http://192.168.1.124/api/LiveData.xml")
-        logger.debug("Page = %s" % page.text)
+#        logger.debug("Page = %s" % page.text)
         soup = BeautifulSoup(page.text,"xml")
 
         for i in result:
-            logger.debug("I = %s" % i)
+#            logger.debug("I = %s" % i)
             ttag = soup.LiveData.Power.find(i).PowerNow
             result[i] = int(ttag.text)
         logger.debug("result = %s" % result)
