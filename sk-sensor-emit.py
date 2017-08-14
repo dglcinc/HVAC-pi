@@ -91,7 +91,7 @@ while 1:
             for d in data:
                 logger.debug("value = %s" % str(d))
                 deltas["updates"][0]["values"].append({
-                    "path": "electrical.switch.utility.%s.state" % d,
+                    "path": "electrical.ac.switch.utility.%s.state" % d,
                     "value": data[d]
                 })
     

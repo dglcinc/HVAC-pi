@@ -1,6 +1,6 @@
+import xml.etree.ElementTree as ET
 import requests
 import logging
-from bs4 import BeautifulSoup
 import re
 
 MTU1 = "MTU1"
@@ -20,11 +20,14 @@ def status():
     try:
         logger.debug("Parsing TED data...")
         page = requests.get("http://192.168.1.124/api/LiveData.xml")
-        soup = BeautifulSoup(page.text,"xml")
+        e = ET.fromstring(page.text)
+        logger.debug("E = %s" % e.__dict__)
 
         for i in result:
-            ttag = soup.LiveData.Power.find(i).PowerNow
-            result[i] = int(ttag.text)
+            logger.debug("i = %s" % i)
+            a = e.find(".//Power/%s/PowerNow" % i)
+            logger.debug("a = %s" % a.__dict__)
+            result[i] = a.text
         logger.debug("result = %s" % result)
     except:
         logger.exception("Exception collecting data from TED5000")

@@ -29,6 +29,7 @@ status_map = {
     "Cooling": "cool",
     "off": "off"
 }
+HOMEPAGE = "https://www.mytotalconnectcomfort.com/portal"
 
 try:
     cj = cookielib.CookieJar()
@@ -53,8 +54,17 @@ def status(verbose=False):
         try:
             if logged_in == False:
                 logger.debug("Not logged in; logging in...")
-                br.open("https://www.mytotalconnectcomfort.com/portal")
-                br.select_form(nr=0)
+                hp = br.open(HOMEPAGE)
+                # try retsetting Mechanize
+                try:
+                    br.select_form(nr=0)
+                except:
+                    logger.exception("form error on: %s" % hp.read())
+                    br = mechanize.Browser()
+                    cj = cookielib.CookieJar()
+                    br.set_cookiejar(cj)
+                    br.open(HOMEPAGE)
+                    br.select_form(nr=0)
                 br.form['UserName'] = hs.uid
                 br.form['Password'] = hs.pwd
                 response = br.submit()
