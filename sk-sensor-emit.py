@@ -71,10 +71,16 @@ while 1:
 
         for d in data:
             logger.debug("value = %s" % str(d))
-            deltas["updates"][0]["values"].append({
-                "path":  "environment.inside.hvac.temperature.%s" % d,
-                "value": data[d]
-            })
+            if d == "AMB":
+                deltas["updates"][0]["values"].append({
+                    "path":  "environment.outside.thermostat.temperature",
+                    "value": data[d]
+                })
+            else:
+                deltas["updates"][0]["values"].append({
+                    "path":  "environment.inside.hvac.temperature.%s" % d,
+                    "value": data[d]
+                })
 
     elif args.stype == "GPIO":
         import HVAC.Relay
@@ -102,16 +108,22 @@ while 1:
     elif args.stype == "RedLink":
         import HVAC.Stats
         data = HVAC.Stats.status()
-        logger.debug(str(data))
+#        logger.debug(str(data))
 
+        deltas["updates"][0]["values"].append({
+            "path": "environment.outside.thermostat.humidity",
+            "value": data["outhum"]
+        })
         for d in data:
+            if d == "outhum":
+                continue
             deltas["updates"][0]["values"].append({
                 "path": "environment.inside.thermostat.%s.temperature" % data[d]["name"],
-                "value": pt.f2k(data[d]["temp"])
+                "value": pt.f2k(int(data[d]["temp"]))
             })
             deltas["updates"][0]["values"].append({
                 "path": "environment.inside.thermostat.%s.humidity" % data[d]["name"],
-                "value": data[d]["hum"]
+                "value": int(data[d]["hum"])
             })
             deltas["updates"][0]["values"].append({
                 "path": "environment.inside.thermostat.%s.redlinkid" % data[d]["name"],
@@ -121,15 +133,12 @@ while 1:
                 "path": "environment.inside.thermostat.%s.state" % data[d]["name"],
                 "value": data[d]["status"]
             })
-#            deltas["updates"][0]["values"].append({
-#                "path": "environment.inside.thermostat.%s" % data[d]["name"],
-#                "meta": { "displayName": data[d]["name"] }
-#            })
 
     # output deltas and decide whether to continue looping
     #logger.debug("Daemon mode = %i" % args.daemon)
     if args.daemon == True:
         print(json.dumps(deltas))
+        sys.stdout.flush()
         sleepytime = 0.5
         if args.stype == "RedLink":
             sleepytime = 2.0

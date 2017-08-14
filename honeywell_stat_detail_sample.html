@@ -1,0 +1,685 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+
+<!--[if IE 8 ]>    <html class="ie8" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>DSTRS FAM ROOM Control</title>
+
+    <!--[if IE]>
+        <style>
+            .page { 
+                    height: auto !important;
+                  }
+        </style>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/jquery.qtip.truehome.css"/>
+
+    
+    <link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/jquery.ui.truhome.css"/>
+
+    
+    <link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/Layout.css?v=2.5.15" />
+    <link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/Site.css?v=2.5.15" />
+    <link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/Buttons.css?v=2.5.15" />
+    <link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/EditorTemplates.css?v=2.5.15" />
+    <link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/ModalAjaxContentDialog.css?v=2.5.15" />
+
+    
+    <script type="text/javascript" src="/portal/Scripts/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/portal/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="/portal/Scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="/portal/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="/portal/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="/portal/Scripts/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="/portal/Scripts/jquery.idletimer.js"></script>
+    <script type="text/javascript" src="/portal/Scripts/jquery.idletimeout.js"></script>
+
+    
+    <script type="text/javascript" src="/portal/Scripts/Common/SessionTimeoutHandler.js?v=2.5.15"></script>
+
+    
+    <script type="text/javascript" src="/portal/Scripts/Common/ModalAjaxContentDialog.js?v=2.5.15"></script>
+    <script type="text/javascript" src="/portal/Scripts/Common/CustomEvents.js?v=2.5.15"></script>
+    <script type="text/javascript" src="/portal/Scripts/Common/EditorTemplates.js?v=2.5.15"></script>
+    <script type="text/javascript" src="/portal/Scripts/Common/BrowserDetect.js?v=2.5.15"></script>
+    <script type="text/javascript" src="/portal/Scripts/Common/Ajax.js?v=2.5.15"></script>
+    <script type="text/javascript" src="/portal/Scripts/Common/IE.js?v=2.5.15"></script>
+
+    <script type="text/javascript">
+        var _unauthorizedAjaxRedirectTo = "/portal/";
+    </script>
+
+    
+
+
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+    
+<link rel="stylesheet" type="text/css" href="/portal/Content/TrueHome/Control.css?v=2.5.15" />
+
+<script type="text/javascript" src="/portal/Scripts/Control/Control.js?v=2.5.15"></script>
+<script type="text/javascript" src="/portal/Scripts/Control/Control.Model.js?v=2.5.15"></script>
+<script type="text/javascript" src="/portal/Scripts/Control/Control.Res.js?v=2.5.15"></script>
+<script type="text/javascript" src="/portal/Scripts/Control/Control.UI.js?v=2.5.15"></script>
+<script type="text/javascript" src="/portal/Scripts/Control/Control.Urls.js?v=2.5.15"></script>
+<script type="text/javascript" src="/portal/Scripts/Control/Control.Init.js?v=2.5.15"></script>
+<script type="text/javascript" >
+    $(document).ready(function()
+    {
+        ///////////////////// pass model data to client-side logic /////////////////////
+        Control.Model.set(Control.Model.Property.displayedUnits, 'F');
+        Control.Model.set(Control.Model.Property.commercial, false);
+        Control.Model.set(Control.Model.Property.communicationLost, false);
+        Control.Model.set(Control.Model.Property.coolLowerSetpLimit, 69.0000);
+        Control.Model.set(Control.Model.Property.coolNextPeriod, 72);
+        Control.Model.set(Control.Model.Property.coolSetpoint, 74.0);
+        Control.Model.set(Control.Model.Property.coolUpperSetptLimit, 99.0000);
+        Control.Model.set(Control.Model.Property.deadband, 3.0000);
+        Control.Model.set(Control.Model.Property.deviceID, 2417403);
+        Control.Model.set(Control.Model.Property.dispTemperature, 74.0000);
+        Control.Model.set(Control.Model.Property.dispTemperatureAvailable, true);
+        Control.Model.set(Control.Model.Property.dualSetpointStatus, false);
+        Control.Model.set(Control.Model.Property.heatLowerSetptLimit, 40.0000);
+        Control.Model.set(Control.Model.Property.heatNextPeriod, 72);
+        Control.Model.set(Control.Model.Property.heatSetpoint, 70.0);
+        Control.Model.set(Control.Model.Property.heatUpperSetptLimit, 75.0000);
+        Control.Model.set(Control.Model.Property.holdUntilCapable, false);
+        Control.Model.set(Control.Model.Property.indoorHumidity, 50.0000);
+        Control.Model.set(Control.Model.Property.indoorHumiditySensorAvailable, true);
+        Control.Model.set(Control.Model.Property.isInVacationHoldMode, false);
+        Control.Model.set(Control.Model.Property.outdoorHumidity, 68.0000);
+        Control.Model.set(Control.Model.Property.outdoorTemp, 77.0000);
+        Control.Model.set(Control.Model.Property.schedCoolSp, 85.0000);
+        Control.Model.set(Control.Model.Property.schedHeatSp, 62.0000);
+        Control.Model.set(Control.Model.Property.scheduleCapable, false);
+        Control.Model.set(Control.Model.Property.setpointChangeAllowed, true);
+        Control.Model.set(Control.Model.Property.statusCool, 2);
+        Control.Model.set(Control.Model.Property.statusHeat, 2);
+        Control.Model.set(Control.Model.Property.switchAutoAllowed, true);
+        Control.Model.set(Control.Model.Property.switchCoolAllowed, true);
+        Control.Model.set(Control.Model.Property.switchEmergencyHeatAllowed, false);
+        Control.Model.set(Control.Model.Property.switchHeatAllowed, true);
+        Control.Model.set(Control.Model.Property.switchOffAllowed, true);
+        Control.Model.set(Control.Model.Property.systemSwitchPosition, 5);
+                Control.Model.set(Control.Model.Property.temporaryHoldUntilTime, null);
+
+        Control.Model.set(Control.Model.Property.vacationHold, 0);
+                Control.Model.set(Control.Model.Property.vacationHoldUntilTime, null);
+
+        Control.Model.set(Control.Model.Property.fanMode, 2);
+
+        Control.Model.set(Control.Model.Property.fanModeAutoAllowed, true);
+
+        Control.Model.set(Control.Model.Property.fanModeOnAllowed, true);
+
+        Control.Model.set(Control.Model.Property.fanModeCirculateAllowed, true);
+
+        Control.Model.set(Control.Model.Property.fanModeFollowScheduleAllowed, false);
+        Control.Model.set(Control.Model.Property.hasFan, true);
+        Control.Model.set(Control.Model.Property.weatherPhrase, 'Mostly cloudy');
+        if (48 != 0) {
+            Control.Model.set(Control.Model.Property.weatherHumidity, '48');
+        } else {
+            Control.Model.set(Control.Model.Property.weatherHumidity, formatHumidity(0, false));
+        }
+        if (82 != 0) {
+            Control.Model.set(Control.Model.Property.weatherTemperature, '82');
+        } else {
+            Control.Model.set(Control.Model.Property.weatherTemperature, formatTemperature(0, false));
+        }
+        Control.Model.set(Control.Model.Property.weatherHasStation, false);
+        Control.Model.set(Control.Model.Property.weatherIcon, 6);
+        Control.Model.set(Control.Model.Property.canControlHumidification, false);
+
+
+        Control.Model.clearPropertyUpdates();
+
+        ///////////////////// pass resources to client-side logic /////////////////////
+        Control.Res.F1DataSessionStarted = "Data Session started successfully.";
+        Control.Res.F1DataSessionFailed = "Data Session initialization failed.";
+        Control.Res.F1DataSessionOpen = "Data Session is open.";
+        Control.Res.F1StatusCommunicationLost = "Communication with your thermostat has been lost.";
+        Control.Res.F1DataSessionTimeout = "Data Session is no longer open.";
+        Control.Res.FollowingSchedule = "Following Schedule";
+        Control.Res.Help = "Help";
+        Control.Res.FollowingScheduleInRecovery = "Following Schedule in Recovery";
+        Control.Res.FanHelpTextOnMode = "<p><b>On</b>: Fan is always on.</p>";
+        Control.Res.FanHelpTextAutoMode = "<p><b>Auto</b>: Fan runs only when the heating or cooling system is on.</p>";
+        Control.Res.FanHelpTextCirculateMode = "<p><b>Circulate</b>: Fan runs randomly, about 35% of the time.</p>";
+        Control.Res.FanHelpTextFollowScheduleMode = "<p><b>Follow Schedule</b>: Fan controlled by the program schedule.</p>";
+        Control.Res.FanHelpText = "<p>After you select your desired setting, press <b>Submit</b> to save your changes.</p>";
+        Control.Res.LocationCodeChange = "Please contact the account owner to have the location code changed.";
+        Control.Res.UnsavedChanges = "You have unsaved changes. Click Submit in the lower right corner of control panel.";
+
+        ///////////////////// pass urls to client-side logic /////////////////////
+        Control.Urls.refreshAlerts = '/portal/Device/Alerts?locationId=2393125&deviceId=2417403';
+        Control.Urls.refreshDataSession = '/portal/Device/CheckDataSession/2417403';
+        Control.Urls.locationDeviceIndex = '/portal/2393125/Zones';
+        Control.Urls.submitControlScreenChanges = '/portal/Device/SubmitControlScreenChanges';
+        Control.Urls.forecasts = '/portal/Device/Forecasts?locationId=2393125&units=Fahrenheit';
+        Control.Urls.humidificationMenu = '/portal/Device/Menu/2417403/tab2';
+
+        ///////////////////// initialize client-side logic /////////////////////
+        Control.Init();
+    });
+</script>
+
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33271749-1']);
+        _gaq.push(['_setDomainName', 'alarmnet.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function ()
+        {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        var noCookiesErrorMessage = 'This site will not operate without Cookies enabled.   Refer to the FAQs tab on this site to learn about enabling Cookies for your browser.';
+    </script>
+</head>
+<body>
+    <div id="_verticalGradientBackground">
+    </div>
+
+    <div id="_contentWrapper">
+        <div id="_leftBackground">
+        </div>
+        <div id="_content">
+            <div id="header">
+                <div id="header-top">
+                    <ul id="toplinks">
+                        <li><a href="https://www.honeywell.com" target="_blank">Honeywell.com</a></li>
+                        <li><a href="https://yourhome.honeywell.com/" target="_blank">Home Comfort &amp; Energy Systems</a></li>
+                    </ul>
+                </div>
+                <div id="logo">
+                    <a href="/portal/">Honeywell - My Total Connect Comfort<span></span></a>
+                </div>
+            </div>
+            <div id="menucontainer">
+                <ul id="menu">
+                    <li class="menulink"><a href="https://yourhome.honeywell.com/home/Applications/ContactUs.aspx"
+                        target="_blank">
+                        Contact Us
+                    </a></li>
+                    <li class="menudivider"></li>
+                    <li class="menulink">
+                        <a href="/portal/Home/FAQs">FAQs</a>
+                    </li>
+                    <li class="menudivider"></li>
+                        <li class="menulink">
+                            <a href="/portal/MyAccount">My Account</a>
+                        </li>
+                        <li class="menudivider"></li>
+                        <li class="menulink">
+                            <a href="/portal/">Control Center</a>
+                        </li>
+                        <li class="menudivider"></li>
+                        <li class="menulink">
+                            <a href="/portal/Account/LogOff">Sign Out</a>
+                        </li>
+                        <li class="menudivider"></li>
+                        <li id="greeting">
+                            Welcome
+                            <b>David</b> </li>
+                </ul>
+            </div>
+            <div id="red-grey-line">
+            </div>
+            <div id="breadcrumb">
+                
+    <div class="crumbs">
+        <a href="/portal/">Control Center</a>
+    </div>
+    <div class="breadcrumb-arrow"></div>
+    <div class="crumbs">
+        <a href="/portal/Locations">My Locations</a>
+    </div>
+    <div class="breadcrumb-arrow"></div>
+    <div class="crumbs">
+        <a href="/portal/2393125/Zones">Thermostat(s) in 68 Lookout</a>
+    </div>
+    <div class="breadcrumb-arrow"></div>
+    <div class="crumbs">
+        DSTRS FAM ROOM Control
+    </div>
+
+            </div>
+            <div id="main">
+                <noscript>
+                    <div id="NoJavaScript">This site will not operate without JavaScript enabled.  Refer to the FAQs tab on this site to learn about enabling JavaScript for your browser.</div>
+                </noscript>
+                <div id="NoCookies">
+
+                </div>
+                <div id="unsupportedbrowser">
+                </div>
+                <div id="mainContent">
+
+                    
+
+
+
+
+
+<div class="TitleAndAlerts">
+
+    <div id="ControlScreenHeader">
+        <h1 id="ZoneName">DSTRS FAM ROOM Control</h1>
+    </div>
+
+    <div id="AlertsPlaceHolder">
+
+</div>
+
+</div>
+
+<form id="ControlForm" action="">
+
+    
+
+    <div id="ControlScreen" class="WithOutdoor WithFan">
+
+        
+
+        <div id="TempDisplays">
+            <div id="IndoorDisplay">
+
+                <div class="IndoorTemp">
+                    <div class="IndoorTempHdr">Indoor</div>
+                    <div class="IndoorTempDisplay">
+                        <div class="DisplayValue">74</div><span class="NoBold">&deg;</span>
+                    </div>
+                </div>
+
+                <div class="IndoorHumidity " style="">
+                    <div class="IndoorHumidityDisplay">
+                        <div class="DisplayValue">50</div><sup class="IndoorHumidityPercent">%</sup>
+                    </div>
+                    <div class="IndoorHumidityHdr">Humidity</div>
+                </div>
+            </div>
+            <div id="OutdoorDisplay">
+                <div class="OutdoorDisplayHdr">Outdoor</div>
+
+                <div class="OutdoorTempDisplay">
+                    
+                    <div class="DisplayValue">77</div><span class="NoBold">&deg;</span>
+                </div>
+
+                <div class="OutdoorHumidity">
+                    <div class="OutdoorHumidityDisplay">
+                        
+                        <div class="DisplayValue">68</div><sup class="OutdoorHumidityPercent">%</sup>
+                    </div>
+                    <div class="OutdoorHumidityHdr">Humidity</div>
+                </div>
+
+
+                <img id="CurrentWeatherIcon" alt="Mostly cloudy" title="Mostly cloudy" class="WeatherIcon" src="/portal/Images/Icons/Weather/4_mostly_cloudy%402x.png?v=2.5.15" style="display: inline-block" />
+
+                <div class="FiveDayForecastInfo">
+
+                    <div id="FiveDayForecastBtn" class="FiveDayForecastBtn" style="display: inline-block">5-Day Forecast</div>
+
+
+                    <a href="/portal/Location/Edit/2393125" id="InvalidZipCodeLink" style="display: none">Invalid Zip Code</a>
+
+
+                    <div id="LocationCodeChange" title="Help" style="display: none">Invalid Zip Code</div>
+                    <div id="LocationCodeChangeHelpBox" style="display: none">Please contact the account owner to have the location code changed.</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="SystemButtons">
+            <div class="SystemButtonsHdr">System</div>
+
+
+
+
+            <div id="HeatBtn" class="unselectable SystemButton" style="">
+                <div class="SystemText">HEAT</div>
+            </div>
+
+
+            <div id="CoolBtn" class="unselectable SystemButton" style="">
+                <div class="SystemText">COOL</div>
+            </div>
+
+
+            <div id="AutoBtn" class="unselectable SystemButton SystemButtonOn" style="">
+                <div class="SystemText">Auto</div>
+            </div>
+
+
+            <div id="OffBtn" class="unselectable SystemButton" style="">
+                <div class="SystemText">OFF</div>
+            </div>
+
+
+            <div id="EMHeatBtn" class="unselectable SystemButton" style="display: none">
+                <div class="SystemText">EMHEAT</div>
+            </div>
+        </div>
+
+
+
+
+        
+
+        <div id="AutoModeTempControls" style="">
+            <div id="AutoHeatSetpt">
+                <div class="SetPtContainer">
+                    <div class="CurrSetptHdr">Heat Setpoint</div>
+                    <div class="CurrentSetpt"><div class="DisplayValue">70</div><span class="NoBold">&deg;</span></div>
+                </div>
+
+                <div class="SetPtButtons" style="">
+                    <div id="AutoModeHeatUpBtn" class="UpBtn unselectable"> </div>
+                    <div id="AutoModeHeatDownBtn" class="DownBtn unselectable"> </div>
+                </div>
+            </div>
+            <div id="AutoCoolSetpt">
+                <div class="SetPtContainer">
+                    <div class="CurrSetptHdr">Cool Setpoint</div>
+                    <div class="CurrentSetpt"><div class="DisplayValue">74</div><span class="NoBold">&deg;</span></div>
+                </div>
+
+                <div class="SetPtButtons" style="">
+                    <div id="AutoModeCoolUpBtn" class="UpBtn unselectable"> </div>
+                    <div id="AutoModeCoolDownBtn" class="DownBtn unselectable"> </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        
+
+        <div id="NonAutoModeTempControls" style="display: none">
+
+            <div id="NonAutoHeatSetpt" style="display: none">
+                <div class="SetPtContainer">
+                    <div class="CurrSetptHdr">Set To</div>
+                    <div class="CurrentSetpt"><div class="DisplayValue">70</div><span class="NoBold">&deg;</span></div>
+                </div>
+
+                <div class="SetPtButtons" style="">
+                    <div id="NonAutoModeHeatUpBtn" class="UpBtn unselectable"> </div>
+                    <div id="NonAutoModeHeatDownBtn" class="DownBtn unselectable"> </div>
+                </div>
+            </div>
+
+            <div id="NonAutoCoolSetpt" style="display: none">
+                <div class="SetPtContainer">
+                    <div class="CurrSetptHdr">Set To</div>
+                    <div class="CurrentSetpt"><div class="DisplayValue">74</div><span class="NoBold">&deg;</span></div>
+                </div>
+
+                <div class="SetPtButtons" style="">
+                    <div id="NonAutoModeCoolUpBtn" class="UpBtn unselectable"> </div>
+                    <div id="NonAutoModeCoolDownBtn" class="DownBtn unselectable"> </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div id="ScheduledStatus" style="display: none">
+            <div id="ScheduledStatusHdr">
+                Following Schedule
+            </div>
+        </div>
+
+
+        <div id="DemandResponseEventStatus" style="display: none">
+            <div id="DemandResponseEventStatusHdr">
+                <a href="javascript:void(0);" onclick="Control.displayOptOutPopup();">Energy Saving Event</a>
+            </div>
+        </div>
+
+        
+
+        <div id="TemporaryStatus" style="display: none">
+            <div id="HoldUntilTime">
+                Hold Until 
+                <div class="DisplayValue"></div>
+            </div>
+            <div id="HoldUntilOptionsBtn" class="unselectable">Press for Options</div>
+        </div>
+
+        <div id="TemporaryStatusOptions" style="display: none">
+            <div id="TemporaryHoldOptionsHoldUntilContainer">
+                <div class="HoldUntilTimeContainer">
+                    <div class="HoldUntilTimeHdr">Hold Until </div>
+                    <div class="HoldUntilTimeValue"></div>
+                </div>
+                <div class="HoldUntilButtonsContainer">
+                    <div class="HoldUntilUpBtn unselectable"> </div>
+                    <div class="HoldUntilDownBtn unselectable"> </div>
+                </div>
+            </div>
+            <div id="TemporaryStatusOptionButtons">
+
+                <div class="SwitchToPermanentBtn unselectable" style="">Switch to Permanent Hold</div>
+
+                <div class="CancelHoldBtn unselectable" style="display: none">Cancel Hold</div>
+            </div>
+        </div>
+
+        
+
+        <div id="PermanentStatus" style="display: none">
+            <div id="PermanentStatusHdr">Permanent Hold</div>
+            <div id="PermanentStatusOptionsBtn" class="unselectable">Press for Options</div>
+        </div>
+
+        <div id="PermanentStatusOptions" style="display: none">
+            <div id="PermanentStatusOptionsHdr">Permanent Hold</div>
+            <div id="PermanentStatusOptionButtons">
+                <div id="SwitchToTemporaryHoldBtn" class="unselectable">Switch to Temporary Hold</div>
+                <div class="CancelHoldBtn unselectable">Cancel Hold</div>
+            </div>
+        </div>
+
+        
+
+        <div id="SouthernAwayStatus" style="display: none">
+            <div id="SouthernAwayStatusHdr">Dehumidification Away Mode is Active</div>
+            <div id="SouthernAwayHelpButton" class="unselectable">Help</div>
+        </div>
+        <div id="SouthernAwayHelpBox">Dehumidification Away Mode is a pre-programmed option that controls humidity while your house is vacant during the summer, to help protect your home and possessions while you are away. Please contact the contractor who installed your system if you would like to change these settings or learn more about them.</div>
+
+        
+
+        <div id="VacationStatus" style="display: none">
+            <div id="VacationHoldHdr">Away until</div>
+            <div id="VacationHold"></div>
+
+            <div id="VacationHoldHelpButton" class="unselectable" style="display: none">Help</div>
+
+            <div id="VacationHoldCancelButton" class="unselectable" style="">Cancel vacation hold</div>
+        </div>
+        <div id="VacationHoldHelpBox">When the thermostat is in Vacation Mode the settings can not be edited remotely and can only be changed locally at the thermostat.</div>
+
+
+        <div id="OffStatus" style="display: none">
+            <div id="OffStatusHdr">Device is Off</div>
+        </div>
+
+        <div id="MenuOptions">
+            <div class="MenuOptionsButton unselectable">
+                <a class="unselectable" href="/portal/Device/Menu/2417403?ReturnTo=ControlScreen2417403">Menu</a>
+            </div>
+        </div>
+
+
+        <div id="FanSystemButtons" style="">
+            <div id="FanSystemButtonsHdr">Fan</div>
+
+
+            <div id="FanOnBtn" class="unselectable FanSystemButton" style="">
+                <div class="SystemText">On</div>
+            </div>
+
+
+            <div id="FanAutoBtn" class="unselectable FanSystemButton" style="">
+                <div class="SystemText">Auto</div>
+            </div>
+
+
+            <div id="FanCirculateBtn" class="unselectable FanSystemButton FanSystemButtonOn" style="">
+                <div class="SystemText">Circulate</div>
+            </div>
+
+
+            <div id="FanFollowScheduleBtn" class="unselectable FanSystemButton" style="display: none">
+                <div class="SystemText">Follow Schedule</div>
+            </div>
+
+            <div id="FanHelpBtn" class="helpButton unselectable" title="Help" style=""></div>
+        </div>
+
+
+        <div id="EquipmentStatus">
+            <div id="eqStatusFanOn" class="hidden">
+            <div class="equipStatusIcon fanOnIcon"></div>
+            <div class="equipStatusText">Fan is on</div>
+            </div>
+            <div id="eqStatusHeating" class="hidden">
+                <div class="equipStatusIcon heatIcon"></div>
+                <div class="equipStatusText">Heat is on</div>
+            </div>
+            <div id="eqStatusCooling" class="">
+                <div class="equipStatusIcon coolIcon"></div>
+                <div class="equipStatusText">Cool is on</div>
+            </div>
+        </div>
+
+        <div id="DisabledSubmitBtnDiv">
+            <div id="DisabledSubmitBtn" class="unselectable">Submit</div>
+        </div>
+
+        <div id="SubmitBtnDiv">
+            <div id="SubmitBtn" class="unselectable">Submit</div>
+        </div>
+
+        <div id="start-session-status"> </div>
+
+    </div>
+
+    <div id="FiveDayForecast" class="FiveDayForecast" style="display: none">
+        <a href="" tabindex="1"></a>
+        <div class="header">
+                <h2>5-Day Forecast for <a href="/portal/Location/Edit/2393125">68 Lookout Road, Mountain Lakes, New Jersey, 07046</a></h2>
+        </div>
+        <div class="LoadingDiv" style="display: none">
+            <div>
+                <img src="/portal/Images/Icons/icon_activity_indicator_animation.gif?v=2.5.15" alt="Loading..." title="Loading..." />
+            </div>
+            <div style="position: relative; left: 5px;">
+                Loading...
+            </div>
+        </div>
+        <div class="ContentDiv" style="display: none">
+
+        </div>
+        <div class="buttonarea">
+            <div class="button red" id="FiveDayForecastDoneBtn"><span class="left unselectable">Close</span><span class="right"></span></div>
+        </div>
+    </div>
+
+</form>
+
+
+
+<div class="buttonarea">
+    <div class="buttonwrapper">
+        <div class="button back"><a href="/portal/2393125/Zones">Back</a><span class="right"></span></div>
+    </div>
+</div>
+
+
+                </div>
+            </div>
+            <div id="gatewaylog">
+                
+            </div>
+            <div id="_push">
+            </div>
+            <div id="_footer">
+                <div>Version 2.5.15 - June 15, 2017</div>
+                <ul class="left" style="width: 700px;margin-top: 5px;">
+                    <li class="rightborder"><a href="/portal/Home/TermsAndConditions">Privacy Statement and End User License Agreement</a></li>
+                    <li class="rightborder"><a href="/portal/Home/TermsConditions">Terms &amp; Conditions</a></li>
+                    <li class="rightborder"><a href="http://www.mytotalconnectcomfort.com/Account/ResetLocalisationCulture">Global Site</a></li>
+
+                    <li class="rightborder"><a href="/portal/Home/Feedback">Feedback</a></li>
+                    <li><br/>&nbsp;&nbsp;<a href="https://honeywell.com/Pages/Home.aspx" target="_blank">&copy; 2017 Honeywell International Inc.</a></li>
+                </ul>
+                <ul id="CultureControl">
+
+
+<li class="rightborder"><a class="culture-link" data-ajax="false" href="/portal/Account/ChangeCulture?lang=en-US&amp;returnUrl=%2Fportal%2FDevice%2FControl%2F2417403%3Fpage%3D1" style="text-decoration: underline;">English</a> </li>
+
+<li><a class="culture-link" data-ajax="false" href="/portal/Account/ChangeCulture?lang=fr-CA&amp;returnUrl=%2Fportal%2FDevice%2FControl%2F2417403%3Fpage%3D1" style="">Fran&#231;ais</a></li>
+    
+
+                </ul>
+            </div>
+        </div>
+        <div id="_rightBackground">
+        </div>
+    </div>
+
+        <div id="dialog" style="display: none">
+            <div class="warning"></div>
+            <ul>
+                <li class="header">Your session is about to expire.</li>
+                <li>You will be logged off in <span id='dialog-countdown' style='font-weight:bold'></span> seconds.</li>
+                <li>Do you want to continue your session?</li>
+            </ul>
+        </div>
+
+        <script type="text/javascript">
+            var sessionTimeoutHandler = new SessionTimeoutHandler(
+                "#dialog",
+                "#dialog-countdown",
+                "Yes",
+                "No",
+                '/portal/Account/LogOff',
+                '/portal/Account/Timeout'
+            );
+            sessionTimeoutHandler.Initialize();
+        </script>
+    <script type="text/javascript" language="javascript">
+        $(function ()
+        {
+            var isMobileDevice = false;
+
+            if (BrowserDetect.browser == "Explorer" && parseFloat(BrowserDetect.version) < 8)
+            {
+                $("#unsupportedbrowser").html('The web browser you are using is not supported.  A supported browser is required to use Total Connect Comfort.  The most recent versions of Chrome, Safari, Firefox and Internet Explorer may be used.  Update or download one of these browsers to use Total Connect Comfort.');
+            }
+        });
+    </script>
+</body>
+</html>
+
+
