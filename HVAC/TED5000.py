@@ -19,15 +19,16 @@ def status():
     }
     try:
         logger.debug("Parsing TED data...")
-        page = requests.get("http://192.168.1.124/api/LiveData.xml")
+        page = requests.get("http://192.168.1.124/api/LiveData.xml", timeout=2)
+        logger.debug("Got request...")
         e = ET.fromstring(page.text)
-        logger.debug("E = %s" % e.__dict__)
+#        logger.debug("E = %s" % e.__dict__)
 
         for i in result:
-            logger.debug("i = %s" % i)
+#            logger.debug("i = %s" % i)
             a = e.find(".//Power/%s/PowerNow" % i)
-            logger.debug("a = %s" % a.__dict__)
-            result[i] = a.text
+#            logger.debug("a = %s" % a.__dict__)
+            result[i] = int(a.text)
         logger.debug("result = %s" % result)
     except:
         logger.exception("Exception collecting data from TED5000")

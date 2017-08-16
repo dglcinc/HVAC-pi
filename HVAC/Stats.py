@@ -51,42 +51,54 @@ def status(verbose=False):
     # log in to mytotalconnectcomfort.com
     # NOTE: this code currently only works if you only have one location defined...
     if site_ready:
+        stats_page = ""
         try:
             if logged_in == False:
                 logger.debug("Not logged in; logging in...")
-                hp = br.open(HOMEPAGE)
-                # try retsetting Mechanize
-                try:
-                    br.select_form(nr=0)
-                except:
-                    logger.exception("form error on: %s" % hp.read())
-                    br = mechanize.Browser()
-                    cj = cookielib.CookieJar()
-                    br.set_cookiejar(cj)
-                    br.open(HOMEPAGE)
-                    br.select_form(nr=0)
-                br.form['UserName'] = hs.uid
-                br.form['Password'] = hs.pwd
-                response = br.submit()
+                response = br.open(HOMEPAGE)
+
+                # sometimes we get an exception but still logged in...
                 stats_page = response.read()
+                if locationId_prog.findall(stats_page):
+                    logger.debug("Already logged in %s" % locationId)
+                    logged_in == True
+                else:
+                    logger.debug("filling login form...")
+                    try:
+                        br.select_form(nr=0)
+                    except:
+                        # try retsetting Mechanize
+                        logger.exception("form error on: %s" % hp.read())
+                        br = mechanize.Browser()
+                        cj = cookielib.CookieJar()
+                        br.set_cookiejar(cj)
+                        br.open(HOMEPAGE)
+                        br.select_form(nr=0)
+                    br.form['UserName'] = hs.uid
+                    br.form['Password'] = hs.pwd
+                    response = br.submit()
+                    stats_page = response.read()
+                logger.debug("done logging in")
                 list = locationId_prog.findall(stats_page)
+                logger.debug("loclist= %s" % list)
                 locationId = list[0]
                 logger.debug("locationId=%s" % locationId)
                 logged_in = True
             else:
-                refresh_link = "https://www.mytotalconnectcomfort.com/portal"
+                refresh_link = HOMEPAGE
                 logger.debug("Refresh link = %s" % refresh_link)
                 response = br.open(refresh_link)
                 stats_page = response.read()
 #            logger.debug("Stats page = %s" % stats_page)
         except:    
             logger.exception("Error scraping MyTotalConnectComfort.com")
+            logger.debug("Failed on page: %s" % stats_page)
             logged_in = False
             
             # recurse
             if retrying < retry_count:
                 retrying += 1
-                result = status()
+                result = status(verbose)
             else:
                 # reset for next time
                 retrying = 0

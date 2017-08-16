@@ -5,7 +5,7 @@ import json
 import socket
 import time
 import pytemperature as pt
-
+import re
 
 # handle arguments
 parser = argparse.ArgumentParser(description="Emit SignalK deltas for sensors and specialize data sources connected to a Raspberry Pi\n  1Wire: uses GPIO pin 4 (board pin 7) for data, with 4.7k ohm pullup to 3.3V\n  GPIO-IN: configures designated pins as INPUT_PULLUP\n  TED5000: scrapes real-time KWh usage from TED5000 MTUs\n  RedLink: scrapes thermostat info from designated mytotalconnectcomfort.com website and location", formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -14,38 +14,6 @@ parser.add_argument("lmode", nargs="?", choices=["DEBUG", "WARNING", "INFO", "ER
 parser.add_argument("--daemon", action="store_true", default=False,  help="run forever in a while loop")
 args = parser.parse_args()
 
-'''
-if args.daemon == True:
-    from logging import config
-    
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'formatters': {
-            'verbose': {
-                'format': '%(levelname)s %(module)s P%(process)d T%(thread)d %(message)s'
-                },
-            },
-        'handlers': {
-            'sys-logger6': {
-                'class': 'logging.handlers.SysLogHandler',
-                'address': '/dev/log',
-                'facility': "local6",
-                'formatter': 'verbose',
-                },
-            },
-        'loggers': {
-            '': {
-                'handlers': ['sys-logger6'],
-                'level': args.lmode,
-                'propagate': True,
-                },
-            }
-        }
-    
-    config.dictConfig(LOGGING)
-else:
-'''
 logging.basicConfig(format='%(name)s %(levelname)s:%(asctime)s %(message)s',datefmt='%m/%d/%Y %I:%M:%S',level=args.lmode)
 
 logger = logging.getLogger(__name__)
@@ -94,6 +62,11 @@ while 1:
                     "path": "electrical.ac.switch.utility.%s.state" % d,
                     "value": data[d]
                 })
+                deltas["updates"][0]["values"].append({
+                    "path": "electrical.ac.switch.utility.%s.statenum" % d,
+                    "value": int(data[d])
+
+                })
     
         elif args.stype == "TED5000":
             import HVAC.TED5000
@@ -119,21 +92,33 @@ while 1:
             for d in data:
                 if d == "outhum":
                     continue
+                fname = re.sub(r"[\s+]", '_', data[d]["name"])
+#                logger.debug("fname = %s" % fname)
                 deltas["updates"][0]["values"].append({
-                    "path": "environment.inside.thermostat.%s.temperature" % data[d]["name"],
+                    "path": "environment.inside.thermostat.%s.temperature" % fname,
                     "value": pt.f2k(int(data[d]["temp"]))
                 })
                 deltas["updates"][0]["values"].append({
-                    "path": "environment.inside.thermostat.%s.humidity" % data[d]["name"],
+                    "path": "environment.inside.thermostat.%s.humidity" % fname,
                     "value": int(data[d]["hum"])
                 })
                 deltas["updates"][0]["values"].append({
-                    "path": "environment.inside.thermostat.%s.redlinkid" % data[d]["name"],
+                    "path": "environment.inside.thermostat.%s.redlinkid" % fname,
                     "value": d
                 })
                 deltas["updates"][0]["values"].append({
-                    "path": "environment.inside.thermostat.%s.state" % data[d]["name"],
+                    "path": "environment.inside.thermostat.%s.state" % fname,
                     "value": data[d]["status"]
+                })
+                statenums = {
+                    "heat": 1,
+                    "cool": -1,
+                    "fan": 0.5,
+                    "off": 0
+                }
+                deltas["updates"][0]["values"].append({
+                    "path": "environment.inside.thermostat.%s.statenum" % fname,
+                    "value": statenums[data[d]["status"]]
                 })
     except:
         logger.exception("Unable to complete a deltas run due to exception.")
