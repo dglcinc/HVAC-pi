@@ -31,9 +31,14 @@ status_map = {
 }
 HOMEPAGE = "https://www.mytotalconnectcomfort.com/portal"
 
+# prevent browser class from saving history
+class NoHistory(object):
+    def add(self, *a, **k): pass
+    def clear(self): pass
+
 try:
     cj = cookielib.CookieJar()
-    br = mechanize.Browser()
+    br = mechanize.Browser(history=NoHistory())
     br.set_cookiejar(cj)
     site_ready = True
 
