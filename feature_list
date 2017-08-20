@@ -1,8 +1,4 @@
-Change paths to more generic stuff for stats
 look at how to convert the python scripts to a plugin
 generify the python scripts for protocols (pin assignments, etc.)
-install influxdb and do charting
-put rest of displayNames in defaults file
-change honeywell script to maintain the session
-try to get honeywell script to retrieve data
-create a mechanism to restart providers without retarting server - either sysctl via socket, or watcher script when launching
+try to get honeywell script to retrieve data using honeywell's APIs (probably means reverse-engineering headers)
+create a means to monitor the pi and power cycle it if needed (may need to be a second pi or an iot-enabled switch...)
