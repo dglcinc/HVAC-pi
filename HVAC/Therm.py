@@ -48,8 +48,10 @@ def status(temp_type=DEG_FAHRENHEIT, round_digits=0):
         except KeyError:
             name = sensor.id
         # this will add a new member to the dict with the name of the sensor
-        if (round_digits >= 0):
+        if round_digits == 0:
             result[name] = int(round(thermtemp,round_digits))
+        elif round_digits > 0:
+            result[name] = round(thermtemp,round_digits)
         else:
             result[name] = thermtemp
     logger.debug(result)
